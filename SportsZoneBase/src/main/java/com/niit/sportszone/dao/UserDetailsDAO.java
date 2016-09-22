@@ -13,7 +13,7 @@ public interface UserDetailsDAO {
 
 	public UserDetails get(String id);
 	
-	public UserDetails isValidUser(String id,String password);
+	public boolean isValidUser(String email,String password);
 
 	public List<UserDetails> list();
 }

@@ -2,16 +2,28 @@ package com.niit.sportszone.dao;
 
 import java.util.List;
 
+
 import com.niit.sportszone.model.Cart;
 
+
 public interface CartDAO {
-	public boolean save(Cart cart);
 
-	public boolean update(Cart cart);
+	void saveOrUpdate(Cart cart);
+	
+	void delete(String cartId);
+	
+	Cart getCartByCustomerId(String customerId);
+	
+	List<Cart> listCart();
+	
 
-	public boolean delete(Cart cart);
+	
+	/*Cart createCart(Cart cart);
 
-	public Cart get(String id);
+	Cart read(String cartId);
 
-	public List<Cart> list();
+	void update(String cartId, Cart cart);
+
+	void delete(String Id);
+*/
 }

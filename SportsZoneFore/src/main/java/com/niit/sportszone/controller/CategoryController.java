@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.niit.sportszone.dao.CategoryDAO;
 import com.niit.sportszone.model.Category;
 
 
 @Controller
+@RequestMapping("/manageCategories")
 public class CategoryController {
 
 	private static Logger log = LoggerFactory.getLogger(CategoryController.class);
@@ -53,17 +53,20 @@ public class CategoryController {
 	@RequestMapping(value="/category/add", method=RequestMethod.POST)
 	public String addCategory(@ModelAttribute("category") Category category)
 	{	
-		
-		log.debug("Starting of the method add category");
-		categoryDAO.save(category);
+		ModelAndView mv = new ModelAndView();
+		if (categoryDAO.get(category.getId()) == null) {
+			log.debug("Starting of the method add category");
+			categoryDAO.save(category);
 		log.debug("Ending of the method addcategory");
+		} else {
+			mv.addObject("errorMessage", "The record exist with this id"
+					+ category.getId());
+		}
 		return "category";
 		
 	}
 	
 	//categoryDAO.saveOrUpdate
-
-	
 	
 	@RequestMapping("category/remove/{id}")
 	public ModelAndView deleteCategory(@PathVariable("id") Category id)throws Exception {
@@ -96,7 +99,7 @@ public class CategoryController {
 		}
 		else
 		{
-			mv.addObject("errorMessage","Could update the record");
+			mv.addObject("errorMessage","Couldnot update the record");
 		}
 		
 		return mv;

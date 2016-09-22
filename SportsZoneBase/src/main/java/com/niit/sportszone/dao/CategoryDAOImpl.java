@@ -22,8 +22,6 @@ public class CategoryDAOImpl implements CategoryDAO {
 	
 	private static final Logger log = LoggerFactory.getLogger(CategoryDAO.class);
 	
-			
-			
 	@Autowired
 	private SessionFactory sessionFactory;
 	@Transactional
@@ -101,5 +99,18 @@ public class CategoryDAOImpl implements CategoryDAO {
 			log.info("no products are avaliable");
 		}
 		return list;
+	}
+	public Category getByName(String name) {
+		String hql= " from Category where name ="+"'"+name+"'";
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		List<Category> list = (List<Category>) query.list();
+		if(list != null && !list.isEmpty())
+		{
+			return list.get(0);
+		}
+		else
+		{
+			return null;
+		}
 	}
 	}

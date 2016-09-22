@@ -1,9 +1,6 @@
 package com.niit.sportszone.dao;
 
 import java.util.List;
-
-
-import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,8 +53,8 @@ public class UserDetailsDAOImpl implements UserDetailsDAO {
 		}
 	}
 	@Transactional
-	public UserDetails get(String id) {
-		String  hql = " from UserDetails where id ="+"'"+id+"'";
+	public UserDetails get(String email) {
+		String  hql = " from UserDetails where email ="+"'"+email+"'";
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		List<UserDetails> list = query.list();
 		if(list == null || list.isEmpty())
@@ -70,20 +67,17 @@ public class UserDetailsDAOImpl implements UserDetailsDAO {
 		}
 	}
 	
-	public UserDetails isValidUser(String id,String password)
+	public boolean isValidUser(String email,String password)
 	{
-		//QUERY:-  select * from UserDetails where id='101' and password='niit'
-		String hql="from UserDetails where id='"+ id +"' and password='" + password +"'";
+		//QUERY:-  select * from UserDetails where email='101' and password='niit'
+		String hql="from UserDetails where email='"+ email +"' and password='" + password +"'";
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		List<UserDetails> list = query.list();
-		if(list == null || list.isEmpty())
+		if(list != null || !list.isEmpty())
 		{
-			return null;
+			return true;
 		}
-		else
-		{
-			return list.get(0);
-		}
+		return false;
 		
 		
 	}

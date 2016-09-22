@@ -52,9 +52,9 @@ public class ApplicationContextConfiguration {
 		sessionBuilder.addProperties(getHibernateProperties());
 		sessionBuilder.addAnnotatedClasses(Category.class);
 		sessionBuilder.addAnnotatedClasses(Product.class);
-		sessionBuilder.addAnnotatedClass(Supplier.class);
-		sessionBuilder.addAnnotatedClass(UserDetails.class);
-		sessionBuilder.addAnnotatedClass(Cart.class);
+		sessionBuilder.addAnnotatedClasses(Supplier.class);
+		sessionBuilder.addAnnotatedClasses(UserDetails.class);
+		sessionBuilder.addAnnotatedClasses(Cart.class);
 		return sessionBuilder.buildSessionFactory();
 	}
 

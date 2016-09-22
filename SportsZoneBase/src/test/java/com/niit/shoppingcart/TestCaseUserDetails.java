@@ -75,7 +75,6 @@ public class TestCaseUserDetails {
 	@Test
 	public void getUserDetailsTestCase(){
 		userDetails=userDetailsDAO.get("PRO_002");
-		System.out.println(userDetails.getName());
 		assertEquals(userDetails.getName(),"COOLPAD");
 	}
 	

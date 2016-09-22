@@ -16,4 +16,6 @@ public interface CategoryDAO {
 	public Category get(String id);
 
 	public List<Category> list();
+	
+	public Category getByName(String name);
 }
