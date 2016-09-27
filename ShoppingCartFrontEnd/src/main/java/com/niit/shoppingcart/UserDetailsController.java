@@ -16,6 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.niit.shoppingcart.dao.CartDAO;
 import com.niit.shoppingcart.dao.CategoryDAO;
+import com.niit.shoppingcart.dao.ProductDAO;
+import com.niit.shoppingcart.dao.SupplierDAO;
 import com.niit.shoppingcart.dao.UserDetailsDAO;
 import com.niit.shoppingcart.model.Cart;
 import com.niit.shoppingcart.model.Category;
@@ -46,6 +48,10 @@ public class UserDetailsController {
 	
 	@Autowired
 	CartDAO cartDAO;
+	@Autowired
+	ProductDAO productDAO;
+	@Autowired
+	SupplierDAO supplierDAO;
 
 	@RequestMapping(value="login"  , method=RequestMethod.POST)
 	public ModelAndView login(@RequestParam(value = "id") String id,
@@ -63,6 +69,9 @@ public class UserDetailsController {
 			// find out whether the user is admin or not
 			if (userDetails.getRole().equals("ROLE_ADMIN")) {
 				mv.addObject("isAdmin", "true");
+				mv.addObject("productList",productDAO.list());
+				mv.addObject("categoryList",categoryDAO.list());
+				mv.addObject("supplierList",supplierDAO.list());
 			}
 			else{
 				mv.addObject("isAdmin", "false");

@@ -38,7 +38,7 @@ public class TestCaseCategory {
 	@Test
 	public void categoryAddTestCase()
 	{
-		category.setId("567");
+		category.setCategoryid("8");
 		category.setName("ah55hj");
 		category.setDescription("thigs");
 		boolean flag = categoryDAO.save(category);

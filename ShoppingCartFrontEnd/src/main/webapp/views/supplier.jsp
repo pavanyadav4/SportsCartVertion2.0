@@ -37,9 +37,9 @@ ${errorMessage}
 		<tr>
 			<td colspan="2">
 					
-					<c:if test="${!empty supplier.id}" > 
+					<c:if test="${!empty supplier.name}" > 
 			
-							<td><form:input path="id" disabled="true" readonly="true"/> </td>
+						
 							
 			<input type="submit" value="<spring:message text="Edit supplier"/> "> 
 			
@@ -70,8 +70,8 @@ ${errorMessage}
 				<td>${supplier.id}</td>
 				<td>${supplier.name}</td>
 				<td>${supplier.address}</td>
-				<td><a href="<c:url value="supplier/Update/${supplier.id}"/>">Edit</a></td>
-				<td><a href="<c:url value="supplier/Remove/${supplier.id}"/>">Delete</a></td>
+				<td><a href="<c:url value="supplier/update/${supplier.id}"/>">Edit</a></td>
+				<td><a href="<c:url value="supplier/remove/${supplier.id}"/>">Delete</a></td>
 			</tr>
 		</c:forEach>
 		</table>

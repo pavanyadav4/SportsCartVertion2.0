@@ -121,6 +121,15 @@
 
 				</c:if>
 			</div>
+			
+			<div id="products">
+				<c:if test="${isAdminClickedProducts==true}">
+					<%@ include file="/views/adminHome.jsp"%>
+					<%@ include file="/views/Product.jsp"%>
+
+				</c:if>
+			</div>
+			
 		</div>
 	</div>
 

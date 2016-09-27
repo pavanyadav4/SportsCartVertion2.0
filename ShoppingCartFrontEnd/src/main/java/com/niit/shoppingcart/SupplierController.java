@@ -24,11 +24,11 @@ public class SupplierController {
 	@RequestMapping(value = "/supplier", method = RequestMethod.GET)
 	public String listSuppliers(Model model) {
 		model.addAttribute("supplier", supplier);
-		model.addAttribute("supplierList", supplierDAO.list());
+		model.addAttribute("supplierList", this.supplierDAO.list());
 		return "supplier";
 	}
 
-	@RequestMapping(value = "/supplier/add", method = RequestMethod.POST)
+	@RequestMapping(value = "supplier/add", method = RequestMethod.POST)
 	public String addSupplier(@ModelAttribute("supplier") Supplier supplier) {
 		// check if the record exist with this id
 		// if exist, display error message to the admin record already exist
@@ -37,18 +37,20 @@ public class SupplierController {
 		if (supplierDAO.get(supplier.getId()) == null) {
 			supplierDAO.save(supplier);
 		} else {
-			mv.addObject("errorMessage", "The record exist with this id"
-					+ supplier.getId());
+			supplierDAO.update(supplier);
+		/*	mv.addObject("errorMessage", "The record exist with this id"
+					+ supplier.getId());*/
 		}
-		return "redirect:/manageSupplier";
+		return "redirect:/manageSuppliers";
 	}
 
-	@RequestMapping(value = "/supplier/update/{id}", method = RequestMethod.POST)
-	public String updateSupplier(@ModelAttribute("supplier") String id) {
+	@RequestMapping(value = "supplier/update/{id}")
+	public String updateSupplier(@PathVariable("id") String id) {
 		// check if the record exist with this id
 		// if exist, display error message to the admin record already exist
 		// else save the record
-		ModelAndView mv = new ModelAndView("supplier");
+		supplier=supplierDAO.get(id);
+		ModelAndView mv = new ModelAndView("");
 		if (supplierDAO.get(supplier.getId()) != null) {
 			supplierDAO.update(supplier);
 			mv.addObject("message", "successfully updated");
@@ -56,14 +58,15 @@ public class SupplierController {
 			mv.addObject("errorMessage", "No record exist with this id"
 					+ supplier.getId());
 		}
-		return "redirect:/manageSupplier";
+		return "redirect:/supplier";
 	}
 
-	@RequestMapping("/supplier/remove/{id}")
-	public ModelAndView deleteCategory(@PathVariable("id") String id)
+	@RequestMapping("supplier/remove/{id}")
+	public String deleteCategory(@PathVariable("id") String id)
 			throws Exception {
 		// if id exist in supplier delete it
 		// else display error message
+		supplier=supplierDAO.get(id);
 		boolean flag = supplierDAO.delete(supplier);
 		ModelAndView mv = new ModelAndView("supplier");
 		String msg = "The operation is successfully done";
@@ -71,7 +74,7 @@ public class SupplierController {
 			msg = "The operation  could not success";
 		}
 		mv.addObject("msg", msg);
-		return mv;
+		return "redirect:/supplier";
 	}
 
 }

@@ -2,6 +2,7 @@ package com.niit.shoppingcart.model;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -27,16 +28,26 @@ public class Category {
 	*/
 	
 	@Id
-	private String id;
+	private String categoryid;
 	private String name;
 	@NotEmpty
 	private String description;
-	/*private Set<Product> products;*/
-	public String getId() {
-		return id;
+	@OneToMany(cascade=CascadeType.ALL,mappedBy="category",fetch=FetchType.EAGER )
+
+	private Set<Product> products;
+	
+	public Set<Product> getProducts() {
+		return products;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setProducts(Set<Product> products) {
+		this.products = products;
+	}
+	
+	public String getCategoryid() {
+		return categoryid;
+	}
+	public void setCategoryid(String categoryid) {
+		this.categoryid = categoryid;
 	}
 	public String getName() {
 		return name;
@@ -50,9 +61,6 @@ public class Category {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
-	
-
 }
 
 /*--------------------------------------------------------------*/

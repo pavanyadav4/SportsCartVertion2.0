@@ -18,10 +18,6 @@ import com.niit.shoppingcart.model.Category;
 @EnableTransactionManagement
 public class CategoryDAOImpl implements CategoryDAO {
 	
-	
-	
-			
-			
 	@Autowired
 	private SessionFactory sessionFactory;
 	@Transactional
@@ -60,8 +56,8 @@ public class CategoryDAOImpl implements CategoryDAO {
 		}
 	}
 	@Transactional
-	public Category get(String id) {
-		String  hql = " from Category where id ="+"'"+id+"'";
+	public Category get(String categoryid) {
+		String  hql = " from Category where categoryid ="+"'"+categoryid+"'";
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		List<Category> list = query.list();
 		if(list == null || list.isEmpty())

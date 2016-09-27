@@ -55,6 +55,7 @@ public class ApplicationContextConfiguration {
 		sessionBuilder.addAnnotatedClasses(Supplier.class);
 		sessionBuilder.addAnnotatedClasses(UserDetails.class);
 		sessionBuilder.addAnnotatedClasses(Cart.class);
+		
 		return sessionBuilder.buildSessionFactory();
 	}
 

@@ -1,7 +1,12 @@
 package com.niit.shoppingcart.model;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
@@ -15,6 +20,9 @@ public class Supplier {
 	private String id;
 	private String name;
 	private String address;
+	@OneToMany(cascade=CascadeType.ALL,mappedBy="supplier",fetch=FetchType.EAGER )
+
+	private Set<Product> products;
 	public String getId() {
 		return id;
 	}

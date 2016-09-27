@@ -18,11 +18,7 @@ import com.niit.shoppingcart.model.Product;
 @Repository("productDAO")
 @EnableTransactionManagement
 public class ProductDAOImpl implements ProductDAO {
-	
-
 		
-	
-	
 	@Autowired
 	private SessionFactory sessionFactory;
 	@Transactional

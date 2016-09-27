@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Category</title>
 </head>
 <body>
 
@@ -14,16 +14,16 @@
 	<form:form action="${addAction}" commandName="category">
 		<table>
 			<tr>
-				<td><form:label path="id">
+				<td><form:label path="categoryid">
 						<spring:message text="ID" />
 					</form:label></td>
 					<c:choose>
-				<c:when test="${!empty category.id}">
-					<td><form:input path="id"  readonly="true" /></td>
+				<c:when test="${!empty category.categoryid}">
+					<td><form:input path="categoryid"  readonly="true" /></td>
 				</c:when>
 
 				<c:otherwise>
-					<td><form:input path="id" pattern="{5,10}" required="true"
+					<td><form:input path="categoryid" pattern="{5,10}" required="true"
 							title="id should be between 5 to 10 characters" /></td>
 				</c:otherwise>
 </c:choose>
@@ -70,12 +70,12 @@
 			</tr>
 			<c:forEach items="${categoryList}" var="category">
 				<tr>
-					<td>${category.id}</td>
+					<td>${category.categoryid}</td>
 					<td>${category.name}</td>
 					<td>${category.description}</td>
-					<td><a href="<c:url value="category/Update/${category.id}"/>">Edit</a></td>
+					<td><a href="<c:url value="category/Update/${category.categoryid}"/>">Edit</a></td>
 						<%-- <jsp:include page="edit.jsp"></jsp:include> --%>
-					<td><a href="<c:url value="category/Remove/${category.id}"/>">Delete</a></td>
+					<td><a href="<c:url value="category/Remove/${category.categoryid}"/>">Delete</a></td>
 				</tr>
 			</c:forEach>
 		

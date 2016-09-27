@@ -38,17 +38,16 @@ public class CategoryController {
 		//else save the record
 		
 		ModelAndView mv = new ModelAndView("/category");
-		if (categoryDAO.get(category.getId()) == null) {
+		if(categoryDAO.get(category.getCategoryid()) == null){
 			categoryDAO.save(category);
 			System.out.println("saved");
 			mv.addObject("SavedMsg", "saved successfully");
 		} else {
-			if(categoryDAO.get(category.getId()) != null){
+			
 				categoryDAO.update(category);
 			mv.addObject("errorMessage", "The record exist with this id"
-					+ category.getId());
+					+ category.getCategoryid());
 			}
-		}
 		return "redirect:/manageCategories";
 
 	}
@@ -59,12 +58,12 @@ public class CategoryController {
 		//if exists, update the existing category
 		//if doesnot exist display error message
 		System.out.println("i am in update method");
-		System.out.println(category.getId());
+		System.out.println(category.getCategoryid());
 		category=categoryDAO.get(id);
 		ModelAndView mv = new ModelAndView();
 		
 /*		mv.addObject("clickedEdit", true);*/
-		if (categoryDAO.get(category.getId()) != null) {
+		if (categoryDAO.get(category.getCategoryid()) != null) {
 			categoryDAO.update(category);
 			mv.addObject("updateMsg", "successfully updated");
 		} else {

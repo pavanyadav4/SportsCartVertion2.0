@@ -11,7 +11,9 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import com.niit.shoppingcart.dao.CategoryDAO;
 import com.niit.shoppingcart.dao.ProductDAO;
+import com.niit.shoppingcart.model.Category;
 import com.niit.shoppingcart.model.Product;
 
 public class TestCaseProduct {
@@ -20,6 +22,10 @@ public class TestCaseProduct {
 	ProductDAO productDAO;
 	@Autowired
 	Product product;
+	@Autowired
+	CategoryDAO categoryDAO;
+	@Autowired
+	Category category;
 	
 	AnnotationConfigApplicationContext context;
 	
@@ -37,12 +43,16 @@ public class TestCaseProduct {
 	@Test
 	public void productAddTestCase()
 	{
-		product.setId("PRO_008");
+		
+		product.setId("PRO_02");
 		product.setName("ggk");
 		product.setDescription("this is fsgsff");
 		product.setPrice("70000");
-		
-		assertEquals(productDAO.save(product),true);
+		product.setCategory_id("123");
+		product.setSupplier_id("123");
+	
+		/*(category.getProducts()).add(product);*/
+		assertEquals(	productDAO.save(product),true);
 	}
 
 	/*
